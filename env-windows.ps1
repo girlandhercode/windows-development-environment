@@ -31,21 +31,21 @@ RefreshEnvPath
 #
 
 choco install git --yes
-choco install tortoisegit --yes
+# choco install tortoisegit --yes
 RefreshEnvPath
 
 #
 # AWS awscli
 #
-choco install awscli --yes
-RefreshEnvPath
+# choco install awscli --yes
+# RefreshEnvPath
 
 #
 # MinGW
 # 
 
-choco install mingw --yes
-RefreshEnvPath
+# choco install mingw --yes
+# RefreshEnvPath
 
 # Get-Command mingw32-make
 
@@ -56,41 +56,41 @@ RefreshEnvPath
 # Caddy HTTP Server
 #
 
-choco install caddy --yes
-RefreshEnvPath
+# choco install caddy --yes
+# RefreshEnvPath
 
 #
 # Languages
 #
-choco install php --yes
-choco install ruby --yes
-choco install ruby2.devkit --yes
+# choco install php --yes
+# choco install ruby --yes
+# choco install ruby2.devkit --yes
 choco install python2 --yes
-choco install jdk8 --yes
+# choco install jdk8 --yes
 RefreshEnvPath
 
 # Node
 choco install nodejs.install --yes
 RefreshEnvPath
-npm install --global --production npm-windows-upgrade
+npm install --global npm-windows-upgrade
 npm-windows-upgrade --npm-version latest
 npm install -g gulp-cli 
 npm install -g yo
-npm install -g mocha
-npm install -g install-peerdeps
-npm install -g typescript
+# npm install -g mocha
+# npm install -g install-peerdeps
+# npm install -g typescript
 # npm install prettier-eslint --save-dev
 
 #
 # Docker
 # 
-choco install docker --yes
-choco install docker-machine --yes
-choco install docker-compose --yes
-RefreshEnvPath
-docker pull worpress
-docker pull mysql
-docker pull phpmyadmin
+# choco install docker --yes
+# choco install docker-machine --yes
+# choco install docker-compose --yes
+# RefreshEnvPath
+# docker pull worpress
+# docker pull mysql
+# docker pull phpmyadmin
 
 
 # Yarn
@@ -100,14 +100,14 @@ docker pull phpmyadmin
 npm install -g bower
 
 # Grunt
-npm install -g grunt-cli
+# npm install -g grunt-cli
 
 # ESLint
 npm install -g eslint
 npm install -g babel-eslint
-npm install -g eslint-plugin-react
-npm install -g install-peerdeps
-install-peerdeps --dev eslint-config-airbnb
+# npm install -g eslint-plugin-react
+# npm install -g install-peerdeps
+# install-peerdeps --dev eslint-config-airbnb
 
 #
 # VS Code
@@ -115,71 +115,73 @@ install-peerdeps --dev eslint-config-airbnb
 
 choco install visualstudiocode --yes # includes dotnet
 RefreshEnvPath
-code --install-extension robertohuertasm.vscode-icons
+# code --install-extension robertohuertasm.vscode-icons
+code --install-extension Shan.code-settings-sync
+
 
 # PowerShell support
-code --install-extension ms-vscode.PowerShell
+#code --install-extension ms-vscode.PowerShell
 
 # CSharp support
-code --install-extension ms-vscode.csharp
+#code --install-extension ms-vscode.csharp
 
 # PHP support
-code --install-extension felixfbecker.php-debug
-code --install-extension HvyIndustries.crane
+#code --install-extension felixfbecker.php-debug
+#code --install-extension HvyIndustries.crane
 
 # Ruby support
-code --install-extension rebornix.Ruby
+#code --install-extension rebornix.Ruby
 
 # HTML, CSS, JavaScript support
-code --install-extension Zignd.html-css-class-completion
-code --install-extension lonefy.vscode-JS-CSS-HTML-formatter
-code --install-extension robinbentley.sass-indented
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension RobinMalfait.prettier-eslint-vscode
-code --install-extension flowtype.flow-for-vscode
-code --install-extension dzannotti.vscode-babel-coloring
-code --install-extension esbenp.prettier-vscode
-code --install-extension formulahendry.auto-rename-tag
+#code --install-extension Zignd.html-css-class-completion
+#code --install-extension lonefy.vscode-JS-CSS-HTML-formatter
+#code --install-extension robinbentley.sass-indented
+#code --install-extension dbaeumer.vscode-eslint
+#code --install-extension RobinMalfait.prettier-eslint-vscode
+#code --install-extension flowtype.flow-for-vscode
+#code --install-extension dzannotti.vscode-babel-coloring
+#code --install-extension esbenp.prettier-vscode
+#code --install-extension formulahendry.auto-rename-tag
 
 # NPM support
-code --install-extension eg2.vscode-npm-script
-code --install-extension christian-kohler.npm-intellisense
+#code --install-extension eg2.vscode-npm-script
+#code --install-extension christian-kohler.npm-intellisense
 
 # Mocha support
-code --install-extension spoonscen.es6-mocha-snippets
-code --install-extension maty.vscode-mocha-sidebar
+#code --install-extension spoonscen.es6-mocha-snippets
+#code --install-extension maty.vscode-mocha-sidebar
 
 # React Native support
-code --install-extension vsmobile.vscode-react-native
-npm install -g create-react-native-app
-npm install -g react-native-cli
+#code --install-extension vsmobile.vscode-react-native
+#npm install -g create-react-native-app
+#npm install -g react-native-cli
 
 # Docker support
-code --install-extension PeterJausovec.vscode-docker
+#code --install-extension PeterJausovec.vscode-docker
 
 # PlantUML support
-code --install-extension jebbs.plantuml
+#code --install-extension jebbs.plantuml
 
 #
 # MySQL
 #
 
-choco install mysql --yes
-choco install mysql.workbench --yes
+#choco install mysql --yes
+#choco install mysql.workbench --yes
 
 
 #
 # Android Studio
 # 
 
-choco install androidstudio --yes
+#choco install androidstudio --yes
 
 #
 # Static Site Generators
 #
 
 # Hugo
-choco install hugo --yes
+#choco install hugo --yes
 
 #
 # Basic Utilities
@@ -189,9 +191,9 @@ choco install hugo --yes
 # choco install xenulinksleuth --yes
 
 # File Management
-choco install beyondcompare --yes
-choco install 7zip --yes
-choco install filezilla --yes
+#choco install beyondcompare --yes
+#choco install 7zip --yes
+#choco install filezilla --yes
 choco install dropbox --yes
 
 # Media Viewers
@@ -200,12 +202,12 @@ choco install vlc --yes
 
 # Browsers
 choco install googlechrome --yes
-choco install firefox --yes
+#choco install firefox --yes
 
 # Misc
-choco install sysinternals --yes
-choco install procexp --yes
-choco install awscli --yes
+#choco install sysinternals --yes
+#choco install procexp --yes
+#choco install awscli --yes
 
 RefreshEnvPath
 
