@@ -1,9 +1,9 @@
 #-------------------------------------------------------------------------------#
 #                                                                               #
-# This script installs all the stuff I need to develop the things I develop.    #
-# Run PowerShell with admin priveleges, type `env-windows`, and go make coffee. #
 #                                                                               #
-#                                                                        -James #
+# Run PowerShell with admin priveleges, type `env-windows`                      #
+#                                                                               #
+#                                                                               #
 #                                                                               #
 #-------------------------------------------------------------------------------#
 
@@ -26,47 +26,29 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 RefreshEnvPath
 
+
+
+choco install chocolatey-core.extension
+RefreshEnvPath
+
 #
 # Git
 #
 
-choco install git --yes
+choco install git --yes --params '/GitAndUnixToolsOnPath'
 # choco install tortoisegit --yes
 RefreshEnvPath
 
-#
-# AWS awscli
-#
-# choco install awscli --yes
-# RefreshEnvPath
 
-#
-# MinGW
-# 
+# wontdo: Alias `make` to `mingw32-make` in Git Bash
+# wontdo: Write `mingw32-make %*` to make.bat in MinGW install directory
 
-# choco install mingw --yes
-# RefreshEnvPath
-
-# Get-Command mingw32-make
-
-# todo: Alias `make` to `mingw32-make` in Git Bash
-# todo: Write `mingw32-make %*` to make.bat in MinGW install directory
-
-#
-# Caddy HTTP Server
-#
-
-# choco install caddy --yes
-# RefreshEnvPath
 
 #
 # Languages
 #
 # choco install php --yes
-# choco install ruby --yes
-# choco install ruby2.devkit --yes
 choco install python2 --yes
-# choco install jdk8 --yes
 RefreshEnvPath
 
 # Node
@@ -93,8 +75,6 @@ npm install -g yo
 # docker pull phpmyadmin
 
 
-# Yarn
-# ?? choco install yarn --yes
 
 # Bower
 npm install -g bower
@@ -119,81 +99,31 @@ RefreshEnvPath
 code --install-extension Shan.code-settings-sync
 
 
-# PowerShell support
-#code --install-extension ms-vscode.PowerShell
-
-# CSharp support
-#code --install-extension ms-vscode.csharp
-
-# PHP support
-#code --install-extension felixfbecker.php-debug
-#code --install-extension HvyIndustries.crane
-
-# Ruby support
-#code --install-extension rebornix.Ruby
-
-# HTML, CSS, JavaScript support
-#code --install-extension Zignd.html-css-class-completion
-#code --install-extension lonefy.vscode-JS-CSS-HTML-formatter
-#code --install-extension robinbentley.sass-indented
-#code --install-extension dbaeumer.vscode-eslint
-#code --install-extension RobinMalfait.prettier-eslint-vscode
-#code --install-extension flowtype.flow-for-vscode
-#code --install-extension dzannotti.vscode-babel-coloring
-#code --install-extension esbenp.prettier-vscode
-#code --install-extension formulahendry.auto-rename-tag
-
-# NPM support
-#code --install-extension eg2.vscode-npm-script
-#code --install-extension christian-kohler.npm-intellisense
-
-# Mocha support
-#code --install-extension spoonscen.es6-mocha-snippets
-#code --install-extension maty.vscode-mocha-sidebar
-
-# React Native support
-#code --install-extension vsmobile.vscode-react-native
-#npm install -g create-react-native-app
-#npm install -g react-native-cli
-
-# Docker support
-#code --install-extension PeterJausovec.vscode-docker
-
-# PlantUML support
-#code --install-extension jebbs.plantuml
-
-#
-# MySQL
-#
-
-#choco install mysql --yes
-#choco install mysql.workbench --yes
-
-
-#
-# Android Studio
-# 
-
-#choco install androidstudio --yes
-
-#
-# Static Site Generators
-#
-
-# Hugo
-#choco install hugo --yes
+choco install atom --version 1.24.0-beta1
 
 #
 # Basic Utilities
 #
+choco install wget
+choco install windirstat
+choco install sumatrapdf.install
+choco install peazip.install
+choco install irfanview --params '/assoc=1'
+choco install everything --params '/quick-launch-shortcut /run-on-system-startup /service'
+choco install imgburn
+choco install evernote
+choco install conemu
+choco install f.lux
+choco install plexmediaserver
+choco install paint.net
 
-# choco install slack --yes
+RefreshEnvPath
+
+
 # choco install xenulinksleuth --yes
 
 # File Management
 #choco install beyondcompare --yes
-#choco install 7zip --yes
-#choco install filezilla --yes
 choco install dropbox --yes
 
 # Media Viewers
@@ -204,11 +134,21 @@ choco install vlc --yes
 choco install googlechrome --yes
 #choco install firefox --yes
 
-# Misc
-#choco install sysinternals --yes
-#choco install procexp --yes
-#choco install awscli --yes
 
 RefreshEnvPath
+
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-Bold.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-Medium.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-Regular.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-Text.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-SemiBold.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-Italic.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-MediumItalic.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/IBM/type/tree/master/fonts/Mono/desktop/pc/IBMPlexMono-SemiBoldItalic.ttf
+wget.exe -P C:\Users\trini\Fonts https://github.com/sgolovine/PlexNerdfont/blob/master/Text/IBM%20Plex%20Mono%20Text%20Nerd%20Font%20Complete%20Mono.otf
+wget.exe -P C:\Users\trini\Fonts https://github.com/sgolovine/PlexNerdfont/blob/master/Regular/IBM%20Plex%20Mono%20Nerd%20Font%20Complete%20Mono.otf
+wget.exe -P C:\Users\trini\Fonts https://github.com/sgolovine/PlexNerdfont/blob/master/Medium/IBM%20Plex%20Mono%20Medium%20Nerd%20Font%20Complete%20Mono.otf
+wget.exe -P C:\Users\trini\Fonts https://www.fontsquirrel.com/fonts/download/archivo-narrow.zip
+wget.exe -O Firefox_Quantum_Setup.exe -P C:\Users\trini\Downloads https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=win64&lang=en-US
 
 Write-Output "Finished! Run `choco upgrade all` to get the latest software"
