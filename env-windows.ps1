@@ -153,5 +153,7 @@ wget.exe -P C:\Users\trini\Fonts https://www.fontsquirrel.com/fonts/download/arc
 wget.exe -O Firefox_Quantum_Setup.exe -P C:\Users\trini\Downloads https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=win64&lang=en-US
 wget.exe -O Battle_Net.exe -P C:\Users\trini\Downloads https://www.battle.net/download/getInstallerForGame?os=win&locale=enUS&version=LIVE&gameProgram=BATTLENET_APP
 wget.exe -O Razer_Synapse.exe -P C:\Users\trini\Downloads http://rzr.to/synapse-pc-download
+wget.exe -O DiscordSetup.exe -P C:\Users\trini\Downloads https://discordapp.com/api/download?platform=win
+
 
 Write-Output "Finished! Run `choco upgrade all` to get the latest software"
