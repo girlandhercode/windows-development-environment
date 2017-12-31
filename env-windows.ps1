@@ -116,6 +116,7 @@ choco install conemu
 choco install f.lux
 choco install plexmediaserver
 choco install paint.net
+choco install vlc
 
 RefreshEnvPath
 
@@ -150,5 +151,7 @@ wget.exe -P C:\Users\trini\Fonts https://github.com/sgolovine/PlexNerdfont/blob/
 wget.exe -P C:\Users\trini\Fonts https://github.com/sgolovine/PlexNerdfont/blob/master/Medium/IBM%20Plex%20Mono%20Medium%20Nerd%20Font%20Complete%20Mono.otf
 wget.exe -P C:\Users\trini\Fonts https://www.fontsquirrel.com/fonts/download/archivo-narrow.zip
 wget.exe -O Firefox_Quantum_Setup.exe -P C:\Users\trini\Downloads https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=win64&lang=en-US
+wget.exe -O Battle_Net.exe -P C:\Users\trini\Downloads https://www.battle.net/download/getInstallerForGame?os=win&locale=enUS&version=LIVE&gameProgram=BATTLENET_APP
+wget.exe -O Razer_Synapse.exe -P C:\Users\trini\Downloads http://rzr.to/synapse-pc-download
 
 Write-Output "Finished! Run `choco upgrade all` to get the latest software"
