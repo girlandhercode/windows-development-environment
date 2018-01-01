@@ -444,9 +444,12 @@ Start-Sleep -s 10
 Write-Host "Remaining Pre-Installed MS Packages:"
 Get-AppxPackage | Select Name, PackageFullName
 
-Start-Sleep -s 30
-Get-AppxPackage | Select Name, PackageFullName | Measure-Object
+# Start-Sleep -s 30
+# Get-AppxPackage | Select Name, PackageFullName | Measure-Object
 
 Start-Sleep -s 10
-Write-Output "Finished! Run `choco upgrade all` to get the latest software"
-Write-Output "*******  Reboot  *******"
+
+&".\unpin-start.ps1"
+
+# Write-Output "Finished! Run `choco upgrade all` to get the latest software"
+# Write-Output "*******  Reboot  *******"
