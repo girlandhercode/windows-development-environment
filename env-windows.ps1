@@ -17,6 +17,16 @@ function RefreshEnvPath
         + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
+# set the timezone.
+# tzutil /l lists all available timezone ids
+#      Explaination of ampersand at beginning:
+#      "the solution is to use the Invoke Operator "&", which is used to run script blocks
+#      PS C:\> & 'c:\new folder\myscript.ps1' param1
+#      From: http://blog.heshamamin.com/2009/04/calling-powershell-script-in-path-with.html
+
+& $env:windir\system32\tzutil /s "Eastern Standard Time"
+
+
 #
 # Package Managers
 #
@@ -151,11 +161,11 @@ Reg Add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /V "CortanaEnabl
 Reg Add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /V "BingSearchEnabled" /T REG_DWORD /D 0 /F
 Reg Add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /V "DeviceHistoryEnabled" /T REG_DWORD /D 0 /F
 
-Write-Host "***   Disabling some unecessary scheduled tasks...   ***"
+# Write-Host "***   Disabling some unecessary scheduled tasks...   ***"
 
 # Get-Scheduledtask "SmartScreenSpecific","Microsoft Compatibility Appraiser","Consolidator","KernelCeipTask","UsbCeip","Microsoft-Windows-DiskDiagnosticDataCollector", "GatherNetworkInfo","QueueReporting" | Disable-scheduledtask
 
-Write-Host "***   Stopping and disabling diagnostics tracking services, Onedrive sync service, various Xbox services, Distributed Link Tracking, and Windows Media Player network sharing (you can turn this back on if you share your media libraries with WMP)...   ***"
+# Write-Host "***   Stopping and disabling diagnostics tracking services, Onedrive sync service, various Xbox services, Distributed Link Tracking, and Windows Media Player network sharing (you can turn this back on if you share your media libraries with WMP)...   ***"
 
 # Get-Service Diagtrack,DmwApPushService,OneSyncSvc,XblAuthManager,XblGameSave,XboxNetApiSvc,TrkWks,WMPNetworkSvc | stop-service -passthru | set-service -startuptype disabled
 
@@ -164,6 +174,13 @@ Write-Host "*******   Operations complete.   *******"
 Write-Host "If you have unremovable tiles on your start menu afterwards, copy c:\users\USER\appdata\local\tiledatalayer from a fresh profile, AFTER running the script, to your profile, overwriting what is there. The main file is tiledatelayer.edb. This will give you a default start menu but without all the useless app icons."
 Write-Host "This doesn't seem to be an issues with 1511 +"
 
+
+Write-Host "*******   Remove/Prevent non-provisioned apps installed by the store   *******"
+
+# Disable Suggested Apps In Windows Start Bar
+# From: https://github.com/engrmtm/INT_Experimental
+$CloudRegistry = "HKLM:\Software\Policies\Microsoft\Windows\CloudContent"
+New-ItemProperty -Path $CloudRegistry -Name DisableWindowsConsumerFeatures -Value 1 -PropertyType DWORD -Force | Out-Null
 #
 # Git
 #
@@ -382,19 +399,54 @@ Get-AppxPackage -allusers *Office.Sway* | Remove-AppxPackage
 Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage
 Get-AppxPackage -allusers *XboxOneSmartGlass* | Remove-AppxPackage
 
+
+
+#################################################################
+# From: https://github.com/rgl/windows-domain-controller-vagrant
+#################################################################
+
+# show window content while dragging.
+Set-ItemProperty -Path 'HKCU:Control Panel\Desktop' -Name DragFullWindows -Value 1
+
+# show hidden files.
+Set-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name Hidden -Value 1
+
+# show protected operating system files.
+Set-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowSuperHidden -Value 1
+
+# show file extensions.
+Set-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name HideFileExt -Value 0
+
+# hide the search button.
+Set-ItemProperty -Path HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchboxTaskbarMode -Value 0
+
+# never combine the taskbar buttons.
+# possibe values:
+#   0: always combine and hide labels (default)
+#   1: combine when taskbar is full
+#   2: never combine
+Set-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarGlomLevel -Value 2
+
+# display full path in the title bar.
+New-Item -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState -Force `
+    | New-ItemProperty -Name FullPath -Value 1 -PropertyType DWORD `
+    | Out-Null
+
 RefreshEnvPath
 
-# $path = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
-# IF(!(Test-Path -Path $path))
-# {
-#     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows" -Name "Windows Search"
-# }
-# Set-ItemProperty -Path $path -Name "AllowCortana" -Value 0
-# #Restart Explorer to change it immediately
+
+
 Stop-Process -name explorer
+
+
+Start-Sleep -s 10
 
 Write-Host "Remaining Pre-Installed MS Packages:"
 Get-AppxPackage | Select Name, PackageFullName
 
+Start-Sleep -s 30
+Get-AppxPackage | Select Name, PackageFullName | Measure-Object
+
+Start-Sleep -s 10
 Write-Output "Finished! Run `choco upgrade all` to get the latest software"
 Write-Output "*******  Reboot  *******"
