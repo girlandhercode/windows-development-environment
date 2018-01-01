@@ -427,17 +427,89 @@ Set-ItemProperty -Path HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Na
 #   2: never combine
 Set-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarGlomLevel -Value 2
 
+# Taskbar: use small icons (0: Large Icons, 1: Small Icons)
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarSmallIcons" 1
+
+# SysTray: hide the Action Center, Network, and Volume icons
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" "HideSCAHealth" 1
+
 # display full path in the title bar.
 New-Item -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState -Force `
     | New-ItemProperty -Name FullPath -Value 1 -PropertyType DWORD `
     | Out-Null
 
+# From: https://github.com/JourneyOver/AutoBox
+# Turn on always show all icons in the notification area
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" "EnableAutoTray" 0
+
+# Sound: Disable Startup Sound
+Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" "DisableStartupSound" 1
+Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" "DisableStartupSound" 1
+
+# Start Menu: Disable Highlight Newly Installed Applications
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "Start_NotifyNewApps" 0
+
+
+###########################################################################
+# Function to set registry values and create them if they do not exist:
+# From: https://github.com/chuckbales/powershell
+###########################################################################
+
+# function Set-Reg {
+#     param (
+#         [string]$key,
+#         [string]$name,
+#         [string]$value,
+#         [string]$type
+#     )
+#
+#     If((Test-Path -Path $key) -eq $false) {
+#         New-Item -Path $key
+#     }
+#     $k = Get-Item -Path $key
+#     If($k.GetValue($name) -eq $null) {
+#         New-ItemProperty -Path $key -Name $name -Value $value -PropertyType $type
+#     } else {
+#         Set-ItemProperty -Path $key -Name $name -Value $value
+#     }
+# }
+
+# Set execution policy
+# Set-ExecutionPolicy unrestricted -Force
+
+#Set Windows Explorer settings
+# $key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\'
+# Set-Reg -key $key -name 'HideFileExt' -value 0 -type 'DWord'
+# Set-Reg -key $key -name 'NavPaneShowAllFolders' -value 1 -type 'DWord'
+# Set-Reg -key $key -name 'NavPaneExpandToCurrentFolder' -value 1 -type 'DWord'
+# Set-Reg -key $key -name 'Start_NotifyNewApps' -value 0 -type 'DWord'
+# Set-Reg -key $key -name 'Start_ShowMyComputer' -value 2 -type 'DWord'
+# Set-Reg -key $key -name 'Start_ShowControlPanel' -value 2 -type 'DWord'
+# Set-Reg -key $key -name 'Start_ShowRun' -value 1 -type 'DWord'
+# Set-Reg -key $key -name 'StartMenuAdminTools' -value 2 -type 'DWord'
+# Set-Reg -key $key -name 'TaskbarSmallIcons' -value 1 -type 'DWord'
+# Set-Reg -key $key -name 'TaskbarGlomLevel' -value 2 -type 'DWord'
+
+
+
+
+
+#######################################################################
+# Also from: https://github.com/chuckbales/powershell
+#######################################################################
+
+#Disable Sticky keys prompt
+Write-Host "Disabling Sticky keys prompt..."
+Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Type String -Value "506"
+
+#######################################################################
+
+
+
 RefreshEnvPath
 
 
-
-Stop-Process -name explorer
-
+Stop-Process -ProcessName explorer
 
 Start-Sleep -s 10
 
@@ -449,7 +521,7 @@ Get-AppxPackage | Select Name, PackageFullName
 
 Start-Sleep -s 10
 
-&".\test-mod-app-removal.ps1"
+&".\test-mode-app-removal.ps1"
 
 # Write-Output "Finished! Run `choco upgrade all` to get the latest software"
 # Write-Output "*******  Reboot  *******"

@@ -405,8 +405,8 @@ Switch ($ReadHost) {
                         Stop-Transcript
                         Write-Output "Script has finished. Exiting."
                         Sleep 2
-                        # Exit; $PublishSettings = $No
-                        &".\unpin-start.ps1"
+                        Exit; $PublishSettings = $No
+                        # &".\unpin-start.ps1"
                     }
                 }
             }
@@ -466,8 +466,8 @@ Switch ($ReadHost) {
                 Write-Output "Script has finished. Exiting now."
                 Sleep 2
                 Stop-Transcript
-                # Exit; $PublishSettings = $Debloat
-                &".\unpin-start.ps1"
+                Exit; $PublishSettings = $Debloat
+                #&".\unpin-start.ps1"
             }
             Revert {
                 Write-Output "Reverting changes..."

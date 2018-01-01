@@ -120,12 +120,12 @@ function Pin-App-by-Path([string]$Path, [string]$Action, [switch]$start) {
 
 
 
-# Unpin the annoying stuff from Windows taskbar
+Unpin the annoying stuff from Windows taskbar
 Pin-App "Microsoft Edge" -unpin -taskbar
 Pin-App "SourceTree" -unpin -taskbar
 Pin-App "Store" -unpin -taskbar
 
-# Unpin the annoying stuff from Windows start
+Unpin the annoying stuff from Windows start
 Pin-App "Mail" -unpin -start
 Pin-App "Store" -unpin -start
 Pin-App "Calendar" -unpin -start
@@ -154,6 +154,11 @@ Pin-App "FarmVille2: Country Escape" -unpin -start
 Pin-App "World of Tanks: Blitz" -unpin -start
 Pin-App "Asphalt 8: Airborne" -unpin -start
 Pin-App "Get office" -unpin -start
+Pin-App "March of Empires: War of Lords" -unpin -start
+Pin-App "Facebook" -unpin -start
+Pin-App "MSN News" -unpin -start
+Pin-App "Bing News" -unpin -start
+
 
 # Unpin our set of desired applications from start
 # there is a separate script to re-pin if desired
@@ -165,14 +170,16 @@ Pin-App "Cortana" -unpin -start
 # Pin-App "Internet Explorer" -unpin -start
 # Pin-App "Microsoft Edge" -unpin -start
 # Pin-App "Outlook 2016" -unpin -start
-Pin-App "Skype for Business 2016" -unpin -start
-Pin-App "Skype" -unpin -start
+# Pin-App "Skype for Business 2016" -unpin -start
+# Pin-App "Skype" -unpin -start
 # Pin-App "Word 2016" -unpin -start
 # Pin-App "Excel 2016" -unpin -start
 # Pin-App "PowerPoint 2016" -unpin -start
-Pin-App "Visual Studio 2015" -unpin -start
+# Pin-App "Visual Studio 2015" -unpin -start
 # Pin-App "Visual Studio Code" -unpin -start
 # Pin-App "Fiddler4" -unpin -start
 # Pin-App "SourceTree" -unpin -start
 # Pin-App "Sublime Text 3" -unpin -start
 # Pin-App "Notepad++" -unpin -start
+
+&".\env-windows.ps1"
