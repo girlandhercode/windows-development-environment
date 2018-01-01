@@ -449,7 +449,7 @@ Get-AppxPackage | Select Name, PackageFullName
 
 Start-Sleep -s 10
 
-&".\unpin-start.ps1"
+&".\test-mod-app-removal.ps1"
 
 # Write-Output "Finished! Run `choco upgrade all` to get the latest software"
 # Write-Output "*******  Reboot  *******"

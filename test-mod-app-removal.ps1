@@ -489,3 +489,5 @@ Switch ($ReadHost) {
             }
         }
     }
+
+&".\unpin-start.ps1"
