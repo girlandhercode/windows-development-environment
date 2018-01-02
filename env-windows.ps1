@@ -264,6 +264,7 @@ choco install f.lux --yes
 choco install plexmediaserver --yes
 choco install paint.net --yes
 choco install vlc --yes
+choco install qbittorrent --yes
 
 RefreshEnvPath
 
@@ -503,6 +504,11 @@ Write-Host "Disabling Sticky keys prompt..."
 Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Type String -Value "506"
 
 #######################################################################
+# From: https://github.com/brennanfee/provision-windows
+#######################################################################
+# To query installed features:  Get-WindowsOptionalFeature -Online | where {$_.State -eq "Enabled"} | select FeatureName
+# Install WSL
+Enable-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online -All -NoRestart
 
 
 
@@ -521,7 +527,7 @@ Get-AppxPackage | Select Name, PackageFullName
 
 Start-Sleep -s 10
 
-&".\test-mode-app-removal.ps1"
+&".\test-mod-app-removal.ps1"
 
 # Write-Output "Finished! Run `choco upgrade all` to get the latest software"
 # Write-Output "*******  Reboot  *******"
