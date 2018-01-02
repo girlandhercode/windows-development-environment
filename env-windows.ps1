@@ -264,7 +264,17 @@ choco install f.lux --yes
 choco install plexmediaserver --yes
 choco install paint.net --yes
 choco install vlc --yes
+choco install teracopy --yes
 choco install qbittorrent --yes
+choco install hwinfo.portable --yes
+
+
+##################################
+# Benchmarking
+##################################
+choco install crystaldiskmark --yes
+choco install prime95.portable --yes
+
 
 RefreshEnvPath
 
